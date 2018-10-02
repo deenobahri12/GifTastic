@@ -1,0 +1,73 @@
+body {
+    background-image: url("https://stmed.net/sites/default/files/sports-wallpapers-31391-1800299.jpg");
+    background-size: 100%;
+
+}
+
+h1 {
+    text-align: center;
+}
+
+@keyframes example {
+    from {background-color: rgb(68, 68, 255);}
+    to {background-color: purple;}
+}
+nav {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size:  50px;
+    font-weight: bold;
+    color:white;
+    
+    background-color: rgb(68, 68, 255);
+     height: 100%;
+    -webkit-animation-name: example; /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
+    animation-name: example;
+    animation-iteration-count: infinite;
+
+}
+
+
+.container{
+border: 2px solid black;
+width: 75%;
+padding:auto;
+margin:auto;
+text-align:centre;
+
+}
+
+button {
+    background-color: green;
+    font-size: 25px;
+    
+}
+
+button:hover{
+    background-color:rgb(57, 57, 245);
+    color: white;
+}
+
+p {
+    color: white;
+    font-size: 25px;
+}
+
+#gifs-appear-here{
+    float: left;
+}
+
+* {
+    box-sizing: border-box;
+}
+img {
+    
+    width: 75.50%;
+     
+  }
+
+  #movie-form{
+    font-size: 25px;
+    color: white;
+  }
+  

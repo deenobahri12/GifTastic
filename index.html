@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <title>Sports Giphy</title>
+  <link rel="stylesheet" type="text/css" href="assests/style.css">
+
+
+</head>
+
+<body>
+<div class="container">
+  <nav>
+    <h1> Sport Giftastic!</h1>
+  </nav>
+ 
+  <div id="buttons">
+  
+      <button data-person="basketball" class="btn">
+        BasketBall
+      </button>
+      <button data-person="baseball">
+        BaseBall
+      </button>
+      <button data-person="soccer">
+        Soccer
+      </button>
+      <button data-person="boxing">
+        Boxing
+      </button>
+      <button data-person="tennis">
+        Tennis
+      </button>
+      <button data-person="hockey">
+        Hockey
+      </button>
+      <button data-person="VolleyBall">
+        VolleyBall
+      </button>
+      <button data-person="football">
+        Football
+      </button>
+      <button data-person="golf">
+        Golf
+      </button>
+      <button data-person="track and field">
+        Track and Field
+      </button>
+      <button data-person="karate">
+          Karate
+        </button>
+        <button data-person="weightlifting">
+            WeightLifting
+          </button>
+          
+    <form id="movie-form">
+      <label for="movie-input">Search for a sport</label>
+      <input type="text" id="movie-input"><br>
+
+      <!-- This button will trigger our AJAX call -->
+      <input id="find-movie" type="submit" value="Sport search">
+    </form>
+
+    <!-- We'll be dumping our JSON contents in here -->
+    <div id="movie-view"></div>
+
+  </div>
+  <div id="gifs-appear-here">
+    </div>
+  
+
+
+  <img src="https://api.giphy.com/v1/gifs/search?q=" data-still="https://api.giphy.com/v1/gifs/search?q=" data-animate="https://api.giphy.com/v1/gifs/search?q=" data-state="still" class="gif">
+  <img src="https://api.giphy.com/v1/gifs/search?q=" data-still="https://api.giphy.com/v1/gifs/search?q=" data-animate="https://api.giphy.com/v1/gifs/search?q=" data-state="still" class="gif">
+  <img src="https://api.giphy.com/v1/gifs/search?q=" data-still="https://api.giphy.com/v1/gifs/search?q=" data-animate="https://api.giphy.com/v1/gifs/search?q=" data-state="still" class="gif">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript" src="assests/app.js">
+
+
+  $("button").on("click", function() {
+    var person = $(this).attr("data-person");
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+      person + "&api_key=dc6zaTOxFJmzC&limit=10";
+
+    $.ajax({
+      url: queryURL,
+      method: "GET"
+    })
+      .then(function(response) {
+        var results = response.data;
+
+        for (var i = 0; i < results.length; i++) {
+          var gifDiv = $("<div>");
+
+          var rating = results[i].rating;
+
+          var p = $("<p>").text("Rating: " + rating);
+
+          var personImage = $("<img>");
+          personImage.attr("src", results[i].images.fixed_height.url);
+
+          gifDiv.prepend(p);
+          gifDiv.prepend(personImage);
+
+          $("#gifs-appear-here").prepend(gifDiv);
+        }
+      });
+
+  });
+  //Pause gif work in progress
+  $("data-person").on("click", function() {
+   
+      let state = $(this).attr("data-state");
+
+    
+      if (state === 'still'){
+        const url = $(this).attr("data-animate")
+        $(this).attr("src", url );
+        $(this).attr("data-state", 'animate')
+
+
+      }
+
+      else if (state === 'animate'){ 
+        const url = $(this).attr("data-still");
+        $(this).attr("src", url);
+        $(this).attr("data-state", 'still');
+      }
+      else {
+        alert("Something is off.")
+      }
+     
+              $("data-person").prepend(state);
+    });
+  
+     //search sport in progress
+      $("#gifs-appear-here").on("click", function(event) {
+
+        event.preventDefault();
+
+        var sport = $("#sport-input").val();
+
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q="+ sport + "&api_key=dc6zaTOxFJmzC&limit=10"
+
+       
+
+        $.ajax({
+      url: queryURL,
+      method: "GET"
+    }).then(function(response) {
+     console.log(response);
+        var str = JSON.stringify(response);
+      
+      $("#gifs-appear-here").prepend(str);
+
+      
+    });
+
+
+
+
+
+
+      
+      });
+
+
+</script>
+</div>
+
+ 
+</body>
+
+</html>
